@@ -1,7 +1,21 @@
-- name: Cache multiple paths
-  uses: actions/cache@v3
-  with:
-    path: |
-      ~/cache
-      !~/cache/exclude
-    key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+name: Cache
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  git-auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache multiple paths
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/cache
+          !~/cache/exclude
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
