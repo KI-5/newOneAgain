@@ -1,0 +1,7 @@
+- name: Cache multiple paths
+  uses: actions/cache@v3
+  with:
+    path: |
+      ~/cache
+      !~/cache/exclude
+    key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
